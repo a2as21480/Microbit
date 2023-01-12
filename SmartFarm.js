@@ -64,6 +64,9 @@ basic.forever(function () {
         OLED.clear()
         OLED.writeStringNewLine("Water!!")
         strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+        pins.digitalWritePin(DigitalPin.P5, 1)
+        basic.pause(5000)
+        pins.digitalWritePin(DigitalPin.P5, 0)
     }
     basic.pause(5000)
     basic.clearScreen()
