@@ -13,6 +13,17 @@ basic.pause(2000)
 basic.clearScreen()
 OLED.init(128, 64)
 let strip = neopixel.create(DigitalPin.P4, 1, NeoPixelMode.RGB)
+ESP8266_IoT.connectWifi("KtEgg_61bc", "info95456")
+if (ESP8266_IoT.wifiState(false)) {
+    basic.showLeds(`
+        . . # . .
+        . . # . .
+        . . # . .
+        . . . . .
+        . . # . .
+        `)
+}
+ESP8266_IoT.connectThingSpeak()
 basic.forever(function () {
     WL = Environment.ReadWaterLevel(AnalogPin.P3)
     SM = Environment.ReadSoilHumidity(AnalogPin.P2)
@@ -21,7 +32,15 @@ basic.forever(function () {
     OLED.writeStringNewLine("WaterLV: " + WL)
     OLED.writeStringNewLine("SoilMoi: " + SM)
     OLED.writeStringNewLine("Temp(℃): " + TEMP)
-    OLED.writeStringNewLine("Humi: " + WL)
+    OLED.writeStringNewLine("Humi: " + Humi)
+    ESP8266_IoT.setData(
+    "CURL58RGL6QNIZW1",
+    WL,
+    SM,
+    TEMP,
+    Humi
+    )
+    ESP8266_IoT.uploadData()
     if (WL < 50) {
         basic.showLeds(`
             # . # . #
