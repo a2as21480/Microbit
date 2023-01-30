@@ -1,3 +1,7 @@
+/*
+식당에서 빈자리 표시해주는 장치
+wifi id pw랑 좌석번호는 블루투스와 eeprom 이용해서 수정할 수 있게, 수백개를 깔아야 한다고 생각하면 일일이 코딩하기 어려움
+*/
 let save = 0
 let flag = 0
 ESP8266_IoT.initWIFI(SerialPin.P8, SerialPin.P12, BaudRate.BaudRate115200)
